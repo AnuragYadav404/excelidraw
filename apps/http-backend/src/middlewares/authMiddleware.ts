@@ -1,5 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
+import {getJwtSecret} from "@repo/backend-common/jwt_secret"
+
 
 export function authMiddleware(req: Request, res:Response, next: NextFunction) {
     // here we check whether the user provided credentials are correct or not
@@ -10,7 +12,7 @@ export function authMiddleware(req: Request, res:Response, next: NextFunction) {
         })
         return
     }
-    const decoded = jwt.verify(token as string, "JWT_SECRET")
+    const decoded = jwt.verify(token as string, getJwtSecret())
     if(decoded) {
         // here we can also check if payload is of type Jwt.payload or string
         if (typeof decoded === "string") {

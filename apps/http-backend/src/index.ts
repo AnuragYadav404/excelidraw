@@ -2,7 +2,8 @@ import express from "express";
 import {CreateUserSchema, CreateRoomSchema, SignInSchema} from "@repo/common/types"
 import jwt from "jsonwebtoken";
 import { authMiddleware } from "./middlewares/authMiddleware";
-
+import {getJwtSecret} from "@repo/backend-common/jwt_secret"
+import 'dotenv/config';
 const app = express();
 
 app.post("/signup", (req, res) => {
@@ -45,7 +46,7 @@ app.post("/signin", (req, res) => {
 
     const token = jwt.sign({
         userID
-    }, "JWT_SECRET")
+    }, getJwtSecret())
     res.json({
         message: "Sign in sucessfull",
         token
@@ -71,5 +72,6 @@ app.post("/create-room", authMiddleware,(req, res) => {
 })
 
 app.listen(3000, () => {
-    console.log("HTTP server running on: http://localhost:3000")
+    console.log("HTTP server running on: http://localhost:3000");
+    console.log("Jwt secret is: ", getJwtSecret())
 })
