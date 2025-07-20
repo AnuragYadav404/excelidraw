@@ -18,6 +18,7 @@
     "typescript": "^5.8.3"
   },
   "devDependencies": {
-    "@repo/typescript-config": "workspace:*"
+    "@repo/typescript-config": "workspace:*",
+    "@repo/common": "workspace:*"
   }
 }
