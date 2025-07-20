@@ -19,6 +19,7 @@ app.post("/signin", (req, res) => {
 })
 
 app.post("/create-room", (req, res) => {
+    // need to add authMiddleware here
     // do zod validation here
     res.json({
         message: "Room created",
